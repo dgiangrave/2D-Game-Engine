@@ -1,0 +1,32 @@
+Time: 12:50:06  Message: ### Log Manager Started Up ###
+Time: 12:50:06  Message: TestClass0 has been created as an object in the game world!
+Time: 12:50:06  Message: TestClass0 has an object id of: 0
+Time: 12:50:06  Message: TestClass0 position: (10.000000,10.000000)
+Time: 12:50:06  Message: TestClass1 has been created as an object in the game world!
+Time: 12:50:06  Message: TestClass1 has an object id of: 1
+Time: 12:50:06  Message: TestClass1 position: (20.000000,20.000000)
+Time: 12:50:06  Message: TestClass2 has been created as an object in the game world!
+Time: 12:50:06  Message: TestClass2 has an object id of: 2
+Time: 12:50:06  Message: TestClass2 position: (30.000000,30.000000)
+Time: 12:50:06  Message: The World contains the following TestClass
+Time: 12:50:06  Message: TestClass id: 0
+Time: 12:50:06  Message: TestClass id: 1
+Time: 12:50:06  Message: TestClass id: 2
+Time: 12:50:06  Message: TestClass3 has been created as an object in the game world!
+Time: 12:50:06  Message: TestClass3 has an object id of: 3
+Time: 12:50:06  Message: TestClass3 position: (40.000000,40.000000)
+Time: 12:50:06  Message: TestClass4 has been created as an object in the game world!
+Time: 12:50:06  Message: TestClass4 has an object id of: 4
+Time: 12:50:06  Message: TestClass4 position: (50.000000,50.000000)
+Time: 12:50:06  Message: The World contains the following TestClass
+Time: 12:50:06  Message: TestClass id: 0
+Time: 12:50:06  Message: TestClass id: 1
+Time: 12:50:06  Message: TestClass id: 2
+Time: 12:50:06  Message: TestClass id: 3
+Time: 12:50:06  Message: TestClass id: 4
+Time: 12:50:06  Message: TestClass2 has been deleted from the game world!
+Time: 12:50:06  Message: The World contains the following TestClass
+Time: 12:50:06  Message: TestClass id: 0
+Time: 12:50:06  Message: TestClass id: 1
+Time: 12:50:06  Message: TestClass id: 3
+Time: 12:50:06  Message: TestClass id: 4
