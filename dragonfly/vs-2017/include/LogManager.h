@@ -12,6 +12,9 @@
 // Engine includes
 #include "Manager.h"
 
+// Two-letter acronym for easier access to manager
+#define LM df::LogManager::getInstance()
+
 namespace df {
 
 	const std::string LOGFILE_NAME = "dragonfly.log";

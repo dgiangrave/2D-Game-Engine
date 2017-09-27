@@ -94,7 +94,7 @@ int df::WorldManager::markForDelete(Object *p_o)
 
 
 // Update the world
-void df::WorldManager::upddate()
+void df::WorldManager::update()
 {
 	// Delete all marked objects
 	ObjectListIterator li(&m_deletions);
@@ -104,4 +104,19 @@ void df::WorldManager::upddate()
 	}
 
 	m_deletions.clear();
+}
+
+
+void df::WorldManager::draw() {
+
+	for (int alt = 0; alt <= MAX_ALTITUDE; alt++) {
+		ObjectListIterator li(&m_updates);
+		while (!li.isDone()) {
+			Object *p_temp_o = li.currentObject();
+			if (p_temp_o->getAltitude() == alt) {
+				p_temp_o->draw();
+			}
+			li.next();
+		}
+	}
 }

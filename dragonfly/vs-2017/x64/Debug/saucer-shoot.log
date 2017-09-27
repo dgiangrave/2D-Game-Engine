@@ -1,24 +1,4 @@
-﻿  WorldManager.cpp
-  Vector.cpp
-  utility.cpp
-d:\david giangrave\documents\repos\imgd-3000-17\dragonfly\vs-2017\lib\utility.cpp(21): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\time.h(505): note: see declaration of 'localtime'
-d:\david giangrave\documents\repos\imgd-3000-17\dragonfly\vs-2017\lib\utility.cpp(24): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
-  TestClass.cpp
-d:\david giangrave\documents\repos\imgd-3000-17\dragonfly\vs-2017\lib\testclass.cpp(22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\david giangrave\documents\repos\imgd-3000-17\dragonfly\vs-2017\lib\testclass.cpp(23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  ObjectListIterator.cpp
-  ObjectList.cpp
-  Object.cpp
-  Manager.cpp
-  LogManager.cpp
-d:\david giangrave\documents\repos\imgd-3000-17\dragonfly\vs-2017\lib\logmanager.cpp(32): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-  GameManager.cpp
-  EventStep.cpp
-  Event.cpp
-  Clock.cpp
+﻿  Star.cpp
   game.cpp
   Generating Code...
   saucer-shoot.vcxproj -> D:\David Giangrave\Documents\Repos\IMGD-3000-17\dragonfly\vs-2017\x64\Debug\dragonfly.exe

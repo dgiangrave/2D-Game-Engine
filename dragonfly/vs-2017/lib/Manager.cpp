@@ -4,6 +4,7 @@
 // File:    Manager.cpp
 
 #include "Manager.h"
+#include "WorldManager.h"
 
 // Basic constructor sets general type of manager
 df::Manager::Manager()
@@ -46,4 +47,26 @@ void df::Manager::shutDown()
 bool df::Manager::isStarted() const
 {
 	return is_started;
+}
+
+// Send event to all Objects
+// Return count of number  of events sent
+int df::Manager::onEvent(const Event *p_event) const 
+{
+	// Track the number of events sent
+	int count = 0;
+
+	// Get all the objects in the world and put them in object list ol
+	df::WorldManager& world_manager = df::WorldManager::getInstance();
+	ObjectList ol = world_manager.getAllObjects();
+
+	// Iterate over all objects
+	ObjectListIterator li(&ol);
+	for (li.first(); !li.isDone(); li.next()) {
+		li.currentObject()->eventHandler(p_event);
+		count++;
+	}
+
+	// Return the number of events sent
+	return count;
 }

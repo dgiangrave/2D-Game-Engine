@@ -77,8 +77,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\sfml-2.4\include;..\..\dragonfly\include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\sfml-2.4\lib;..\..\dragonfly\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\sfml-2.4\include;..\..\dragonfly\vs-2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dragonfly\vs-2017\lib;..\..\sfml-2.4\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -87,8 +88,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\..\sfml-2.4\include;..\..\dragonfly\include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\sfml-2.4\lib;..\..\dragonfly\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\sfml-2.4\include;..\..\dragonfly\vs-2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dragonfly\vs-2017\lib;..\..\sfml-2.4\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -110,10 +112,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\David Giangrave\Documents\Visual Studio 2017\Projects\dragonfly\vs-2017\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -143,10 +145,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\David Giangrave\Documents\Visual Studio 2017\Projects\dragonfly\vs-2017\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-main.lib;sfml-audio.lib;sfml-network.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -154,6 +156,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Clock.h" />
+    <ClInclude Include="include\Color.h" />
+    <ClInclude Include="include\DisplayManager.h" />
     <ClInclude Include="include\Event.h" />
     <ClInclude Include="include\EventStep.h" />
     <ClInclude Include="include\GameManager.h" />
@@ -162,6 +166,7 @@
     <ClInclude Include="include\Object.h" />
     <ClInclude Include="include\ObjectList.h" />
     <ClInclude Include="include\ObjectListIterator.h" />
+    <ClInclude Include="include\Star.h" />
     <ClInclude Include="include\TestClass.h" />
     <ClInclude Include="include\utility.h" />
     <ClInclude Include="include\Vector.h" />
@@ -170,6 +175,7 @@
   <ItemGroup>
     <ClCompile Include="..\game.cpp" />
     <ClCompile Include="lib\Clock.cpp" />
+    <ClCompile Include="lib\DisplayManager.cpp" />
     <ClCompile Include="lib\Event.cpp" />
     <ClCompile Include="lib\EventStep.cpp" />
     <ClCompile Include="lib\GameManager.cpp" />
@@ -178,6 +184,7 @@
     <ClCompile Include="lib\Object.cpp" />
     <ClCompile Include="lib\ObjectList.cpp" />
     <ClCompile Include="lib\ObjectListIterator.cpp" />
+    <ClCompile Include="lib\Star.cpp" />
     <ClCompile Include="lib\TestClass.cpp" />
     <ClCompile Include="lib\utility.cpp" />
     <ClCompile Include="lib\Vector.cpp" />

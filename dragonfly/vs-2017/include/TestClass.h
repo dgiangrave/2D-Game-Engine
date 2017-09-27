@@ -18,6 +18,7 @@ namespace df {
 	public:
 		TestClass();
 		~TestClass();
+		void draw();
 
 	};
 

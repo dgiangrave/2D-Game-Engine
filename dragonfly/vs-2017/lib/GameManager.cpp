@@ -9,6 +9,8 @@
 #include "Clock.h"
 #include "WorldManager.h"
 #include "ObjectList.h"
+#include "EventStep.h"
+#include "DisplayManager.h"
 
 #include <Windows.h>
 
@@ -64,6 +66,8 @@ int df::GameManager::startUp()
 		return 1;
 	}
 
+	DM.startUp();
+
 	game_over = false;
 	frame_time = 33;
 
@@ -74,6 +78,8 @@ int df::GameManager::startUp()
 void df::GameManager::shutDown()
 {
 	df::Manager::shutDown();
+
+	DM.shutDown();
 
 	df::LogManager& log_manager = df::LogManager::getInstance();
 	log_manager.writeLog("### Log Manager Shutting Down ###");
@@ -92,30 +98,24 @@ void df::GameManager::run()
 		clock.delta();
 		// ----- Get input -----
 
+		// ------ Step Event -----
+		EventStep s;
+		onEvent(&s);
+
 		// ----- Update Game world state -----
-		/*
+		
 		// Have objects update themselves
-		ObjectListIterator li(&world_objects);
-		for (li.first(); !li.isDone(); li.next())
-		{
-			li.currentObject()->Update();
-		}
+		WM.update();
 
 		// Move all objects
-		for (li.first(); !li.isDone(); li.next())
-		{
-			WorldManager move(li.currentObject());
-		}
 
 		// Draw all objects
-		for (li.first(); !li.isDone(); li.next())
-		{
-			WorldManager draw(li.currentObject());
-		}
-		*/
+		WM.draw();
+		
+		
 		// ----- Draw current scene to back buffer -----
-
 		// ----- Swap back buffer to current buffer -----
+		DM.swapBuffers();
 
 		// ----- Sleep if needed -----
 		int sleep_time = (getFrameTime() - clock.split());

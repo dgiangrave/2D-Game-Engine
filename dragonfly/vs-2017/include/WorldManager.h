@@ -9,14 +9,21 @@
 #include "Manager.h"
 #include "ObjectList.h"
 
+// Two-letter acronym for easier access to manager
+#define WM df::WorldManager::getInstance()
+
+
 namespace df {
 
 	class WorldManager : Manager {
+
+		const int MAX_ALTITUDE = 4;
 
 	private:
 		WorldManager(); // singleton
 		WorldManager(WorldManager const&); // Don't allow copy
 		void operator=(WorldManager const&); // sont allow assignment
+		
 
 		ObjectList m_updates;  // All objects in the world to update
 		ObjectList m_deletions; // All objects to be deleted
@@ -45,11 +52,13 @@ namespace df {
 
 		//update world
 		// Delete objects marked for deletion
-		void upddate();
+		void update();
 
 		// Indicate Object is to be deleted at end of current game loop
 		// return 0 if successful
 		int markForDelete(Object *p_o);
+
+		void draw(); // Call draw method on all objects in the world
 
 	};
 

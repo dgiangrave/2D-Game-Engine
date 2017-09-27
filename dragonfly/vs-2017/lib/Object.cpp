@@ -63,3 +63,16 @@ df::Vector df::Object::getPosition() const {
 int df::Object::eventHandler(const Event *p_e) {
 	return 0;
 }
+
+void df::Object::draw() {
+	//return;
+}
+
+int df::Object::setAltitude(int new_altitude) {
+	m_altitude = new_altitude;
+	return 0;
+}
+
+int df::Object::getAltitude() const {
+	return m_altitude;
+}

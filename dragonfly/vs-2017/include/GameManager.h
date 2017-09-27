@@ -8,6 +8,9 @@
 
 #include "Manager.h"
 
+// Two-letter acronym for easier access to manager
+#define GM df::GameManager::getInstance()
+
 namespace df {
 
 	// Default frame time (game loop time) in millisecs (33 ms == 30 f/s)
@@ -45,6 +48,8 @@ namespace df {
 		// Return frame time
 		// Frame time is target time for game loop, in milliseconds
 		int getFrameTime() const;
+
+
 	};
 
 } // End df namespace

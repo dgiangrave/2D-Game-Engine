@@ -13,6 +13,9 @@
 #include "ObjectList.h"
 #include "ObjectListIterator.h"
 #include "Object.h"
+#include "DisplayManager.h"
+
+#include "Star.h"
 
 int main(int argc, char *argv[]) {
 	
@@ -22,6 +25,7 @@ int main(int argc, char *argv[]) {
 	df::LogManager &log_manager = df::LogManager::getInstance();
 	log_manager.setFlush(true);
 	
+	/*
 	// Add 3 TestClass Objects to the game world with varying locations
 	df::TestClass* tc0 = new df::TestClass;
 	df::TestClass* tc1 = new df::TestClass;
@@ -66,6 +70,12 @@ int main(int argc, char *argv[]) {
 	{
 		log_manager.writeLog("TestClass id: %d", li3.currentObject()->getId());
 	}
+	*/
+
+	new Star;
+	new Star;
+	new Star;
+	new Star;
 
 	game_manager.run();
 

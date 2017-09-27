@@ -19,6 +19,7 @@ namespace df {
 		int id;             // Unique object identifier
 		std::string type;   // user-defined identifier
 		Vector position;    // position in game world
+		int m_altitude;
 
 	public:
 		// Construct object. Set default params and
@@ -50,6 +51,15 @@ namespace df {
 		// Handle event by default ignoring everything
 		// return 0 if ignored
 		virtual int eventHandler(const Event *p_e);
+
+		virtual void draw();
+
+		// Set altitutde of Object with checks for range 0 - Max Alt
+		// Return 0 if ok and -1 otherwise
+		int setAltitude(int new_altitude);
+
+		// Return altitude of object
+		int getAltitude() const;
 	};
 
 } // end namespace df
