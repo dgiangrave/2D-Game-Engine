@@ -159,10 +159,13 @@
     <ClInclude Include="include\Color.h" />
     <ClInclude Include="include\DisplayManager.h" />
     <ClInclude Include="include\Event.h" />
+    <ClInclude Include="include\EventKeyboard.h" />
     <ClInclude Include="include\EventStep.h" />
     <ClInclude Include="include\GameManager.h" />
+    <ClInclude Include="include\InputManager.h" />
     <ClInclude Include="include\LogManager.h" />
     <ClInclude Include="include\Manager.h" />
+    <ClInclude Include="include\EventMouse.h" />
     <ClInclude Include="include\Object.h" />
     <ClInclude Include="include\ObjectList.h" />
     <ClInclude Include="include\ObjectListIterator.h" />
@@ -177,8 +180,11 @@
     <ClCompile Include="lib\Clock.cpp" />
     <ClCompile Include="lib\DisplayManager.cpp" />
     <ClCompile Include="lib\Event.cpp" />
+    <ClCompile Include="lib\EventKeyboard.cpp" />
+    <ClCompile Include="lib\EventMouse.cpp" />
     <ClCompile Include="lib\EventStep.cpp" />
     <ClCompile Include="lib\GameManager.cpp" />
+    <ClCompile Include="lib\InputManager.cpp" />
     <ClCompile Include="lib\LogManager.cpp" />
     <ClCompile Include="lib\Manager.cpp" />
     <ClCompile Include="lib\Object.cpp" />

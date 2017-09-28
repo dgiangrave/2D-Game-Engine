@@ -54,8 +54,11 @@ int df::DisplayManager::startUp() {
 }
 
 void df::DisplayManager::shutDown() {
-	m_p_window->close();
-	delete m_p_window;
+	if (m_p_window != NULL) {
+		m_p_window->close();
+		delete m_p_window;
+		m_p_window = NULL;
+	}
 }
 
 int df::DisplayManager::drawCh(Vector world_pos, char ch, Color color) const {
@@ -127,6 +130,8 @@ int df::DisplayManager::drawCh(Vector world_pos, char ch, Color color) const {
 
 	// Draw character
 	m_p_window->draw(text);
+
+	return 0;
 }
 
 // Render current window buffer
@@ -261,4 +266,9 @@ bool df::DisplayManager::setBackgroundColor(Color new_color) {
 	}
 
 	return true;
+}
+
+
+sf::RenderWindow *df::DisplayManager::getWindow() const {
+	return m_p_window;
 }

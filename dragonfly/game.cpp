@@ -19,11 +19,10 @@
 
 int main(int argc, char *argv[]) {
 	
-	df::GameManager &game_manager = df::GameManager::getInstance();
-	game_manager.startUp();
+	GM.startUp();
 	
-	df::LogManager &log_manager = df::LogManager::getInstance();
-	log_manager.setFlush(true);
+	LM.startUp();
+	LM.setFlush(true);
 	
 	/*
 	// Add 3 TestClass Objects to the game world with varying locations
@@ -72,12 +71,17 @@ int main(int argc, char *argv[]) {
 	}
 	*/
 
-	new Star;
-	new Star;
-	new Star;
-	new Star;
+	//new Star;
+	//new Star;
+	//new Star;
+	//new Star;
 
-	game_manager.run();
+	DM.drawCh(df::Vector(10, 5), '*', df::WHITE);
+	DM.swapBuffers();
+	_sleep(10);
+	DM.shutDown();
+
+	//GM.run();
 
 	
 
@@ -99,7 +103,7 @@ int main(int argc, char *argv[]) {
 
   // Shut everything down.
   //GM.shutDown();
-	game_manager.shutDown();
+	GM.shutDown();
 
 
 }

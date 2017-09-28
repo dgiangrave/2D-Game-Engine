@@ -11,6 +11,7 @@
 #include "ObjectList.h"
 #include "EventStep.h"
 #include "DisplayManager.h"
+#include "InputManager.h"
 
 #include <Windows.h>
 
@@ -53,20 +54,46 @@ int df::GameManager::getFrameTime() const
 // Starts up all other managers in proper order
 int df::GameManager::startUp()
 {
+	// Default Manager start up
 	df::Manager::startUp();
 
-	df::LogManager& log_manager = df::LogManager::getInstance();
-	if (log_manager.startUp() != 0) {
+	// Start Log Manager
+	if (LM.startUp() != 0) {
+		printf("### FAILED TO START LOG MANAGER ###");
 		return 1;
 	}
-	log_manager.writeLog("### Log Manager Started Up ###");
-
-	df::WorldManager& world_manager = df::WorldManager::getInstance();
-	if (world_manager.startUp() != 0) {
+	else {
+		LM.writeLog("### Log Manager Started Up ###");
+	}
+	
+	// Start World Manager
+	if (WM.startUp() != 0) {
+		LM.writeLog("### FAILED TO START WORLD MANAGER ###");
 		return 1;
 	}
+	else {
+		LM.writeLog("### World Manager Started Up ###");
+	}
 
-	DM.startUp();
+	// Start Display Manager
+	if (DM.startUp() != 0) {
+		LM.writeLog("### FAILED TO START DISPLAY MANAGER ###");
+		return 1;
+	}
+	else {
+		LM.writeLog("### Display Manager Started Up ###");
+	}
+
+	// Start Input Manager
+	if (IM.startUp() != 0) {
+		LM.writeLog("### FAILED TO START INPUT MANAGER ###");
+		return 1;
+	}
+	else {
+		LM.writeLog("### Input Manager Started Up ###");
+	}
+
+
 
 	game_over = false;
 	frame_time = 33;
@@ -97,6 +124,7 @@ void df::GameManager::run()
 	{
 		clock.delta();
 		// ----- Get input -----
+		IM.getInput();
 
 		// ------ Step Event -----
 		EventStep s;
