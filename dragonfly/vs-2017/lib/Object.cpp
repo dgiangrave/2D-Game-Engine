@@ -76,3 +76,58 @@ int df::Object::setAltitude(int new_altitude) {
 int df::Object::getAltitude() const {
 	return m_altitude;
 }
+
+df::Vector df::Object::predictPosition() {
+	// Add velocity to position
+	Vector new_pos = position + getVelocity();
+
+	return new_pos;
+}
+
+void df::Object::setSpeed(float new_speed) {
+	speed = new_speed;
+}
+
+float df::Object::getSpeed() const {
+	return speed;
+}
+
+void df::Object::setDirection(Vector newDirection) {
+	direction = newDirection;
+}
+
+df::Vector df::Object::getDirection() const {
+	return direction;
+}
+
+void df::Object::setVelocity(Vector new_velocity) {
+	speed = new_velocity.getMagnitude();
+	direction = new_velocity;
+	direction.normalize();
+}
+
+df::Vector df::Object::getVelocity() const {
+	Vector vel;
+	vel = direction;
+	vel.scale(speed);
+
+	return vel;
+}
+
+bool df::Object::isSolid() const {
+	if (m_solidness == HARD || m_solidness == SOFT) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+int df::Object::setSolidness(Solidness new_solid) {
+	m_solidness = new_solid;
+	return 0;
+}
+
+df::Solidness df::Object::getSolidness() const {
+	return m_solidness;
+}

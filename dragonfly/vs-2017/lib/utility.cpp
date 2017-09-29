@@ -6,6 +6,8 @@
 #include <time.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <cmath>
 
 #include "utility.h"
 
@@ -27,4 +29,15 @@ char *df::getTimeString()
 		p_time->tm_sec);
 
 	return time_str;
+}
+
+
+bool df::posititonsIntersect(Vector p1, Vector p2) {
+	if ((abs(p1.getX() - p2.getX()) <= 1) &&
+		(abs(p1.getY() - p2.getY()) <= 1)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

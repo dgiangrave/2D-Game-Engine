@@ -13,13 +13,26 @@
 
 namespace df {
 
+	// Types of solidness of Object
+	enum Solidness {
+		HARD,       // Object causes collisions and impedes
+		SOFT,       // Object causes collision, but doesn't impede
+		SPECTRAL,   // Object doesn't cause collisions
+	};
+
 	class Object {
+
 
 	private:
 		int id;             // Unique object identifier
 		std::string type;   // user-defined identifier
 		Vector position;    // position in game world
 		int m_altitude;
+
+		Vector direction;	// Direction vector
+		float speed;	// Object speed in direction
+
+		Solidness m_solidness; // Solidness of object
 
 	public:
 		// Construct object. Set default params and
@@ -60,6 +73,37 @@ namespace df {
 
 		// Return altitude of object
 		int getAltitude() const;
+
+		// Set speed of Object
+		void setSpeed(float speed);
+
+		// Get speed pf Object
+		float getSpeed() const;
+
+		// Set direction of Object
+		void setDirection(Vector newDirection);
+
+		// Get direction of Object
+		Vector getDirection() const;
+
+		// Set direction and speed of Object
+		void setVelocity(Vector new_Velocity);
+
+		// Get velocity of Object based on the directiona and speed
+		Vector getVelocity() const;
+
+		// predict object position based on speed and direction
+		// return predicted position
+		Vector predictPosition();
+
+		bool isSolid() const; // True if HARD or SOFT else false
+
+		// Set object solidness with checks for consistency
+		// Return 0 if okay and -1 if not
+		int setSolidness(Solidness new_solid);
+
+		// Return object solidness
+		Solidness getSolidness() const;
 	};
 
 } // end namespace df

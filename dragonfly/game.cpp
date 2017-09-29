@@ -76,12 +76,11 @@ int main(int argc, char *argv[]) {
 	//new Star;
 	//new Star;
 
-	DM.drawCh(df::Vector(10, 5), '*', df::WHITE);
-	DM.swapBuffers();
-	_sleep(10);
-	DM.shutDown();
+	//DM.drawCh(df::Vector(10, 5), '*', df::WHITE);
+	//DM.swapBuffers();
+	//DM.shutDown();
 
-	//GM.run();
+	GM.run();
 
 	
 
