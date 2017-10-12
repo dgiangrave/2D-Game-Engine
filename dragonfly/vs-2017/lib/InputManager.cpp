@@ -79,7 +79,8 @@ void df::InputManager::getInput() {
 		if (event.type == sf::Event::MouseMoved) {
 			EventMouse m;
 			m.setMouseAction(MOVED);
-			m.setMousePosition(Vector(event.mouseButton.x, event.mouseButton.y));
+			Vector mousePos = Vector(event.mouseButton.x, event.mouseButton.y);
+			m.setMousePosition(df::pixelsToSpaces(mousePos));
 			onEvent(&m);
 		}
 
@@ -87,7 +88,8 @@ void df::InputManager::getInput() {
 		if (event.type == sf::Event::MouseButtonPressed) {
 			EventMouse m;
 			m.setMouseAction(CLICKED);
-			m.setMousePosition(Vector(event.mouseButton.x, event.mouseButton.y));
+			Vector mousePos = Vector(event.mouseButton.x, event.mouseButton.y);
+			m.setMousePosition(df::pixelsToSpaces(mousePos));
 			m.setMouseButton(sfMouse2dfMouse(event.mouseButton.button));
 			onEvent(&m);
 		}
@@ -97,7 +99,7 @@ void df::InputManager::getInput() {
 	for (int keyCode = -1; keyCode < sf::Keyboard::KeyCount; keyCode++) {
 		if (sf::Keyboard::isKeyPressed((sf::Keyboard::Key)keyCode)) {
 			EventKeyboard k;
-			k.setKeyboardAction(KEY_PRESSED);
+			k.setKeyboardAction(KEY_DOWN);
 			k.setKey(sfKey2dfKey((sf::Keyboard::Key)keyCode));
 			onEvent(&k);
 		}
@@ -108,7 +110,8 @@ void df::InputManager::getInput() {
 		if (sf::Mouse::isButtonPressed((sf::Mouse::Button)button)) {
 			EventMouse m;
 			m.setMouseAction(PRESSED);
-			m.setMousePosition(Vector(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y));
+			Vector mousePos = Vector(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
+			m.setMousePosition(df::pixelsToSpaces(mousePos));
 			m.setMouseButton(sfMouse2dfMouse((sf::Mouse::Button)button));
 			onEvent(&m);
 		}

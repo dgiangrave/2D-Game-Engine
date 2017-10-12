@@ -8,6 +8,10 @@
 #include "EventCollision.h"
 #include "EventOut.h"
 #include "DisplayManager.h"
+#include "LogManager.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 // Default constructor
 df::WorldManager::WorldManager()
@@ -49,8 +53,9 @@ int df::WorldManager::insertObject(Object *p_o)
 
 int df::WorldManager::removeObject(Object *p_o)
 {
-	if (!m_updates.remove(p_o)) {
-		delete p_o;
+	if ((p_o != NULL) && (!m_updates.remove(p_o))) {
+		//delete p_o;
+		//p_o = NULL;
 		return 0;
 	}
 
@@ -69,7 +74,10 @@ df::ObjectList df::WorldManager::objectsOfType(std::string type) const
 	ObjectList ol;
 	ObjectListIterator li(&m_updates);
 	for (li.first(); !li.isDone(); li.next()) {
-		if (li.currentObject()->getType().compare(type) == 0) {
+		//if (li.currentObject()->getType().compare(type) == 0) {
+		//	ol.insert(li.currentObject());
+		//}
+		if (std::strcmp(li.currentObject()->getType().c_str(), type.c_str())) {
 			ol.insert(li.currentObject());
 		}
 	}
@@ -116,6 +124,8 @@ void df::WorldManager::update()
 	while (!liU.isDone()) {
 		Object *p_temp_o = liU.currentObject();
 
+		
+
 		// Add velocity to position
 		Vector new_pos = p_temp_o->predictPosition();
 
@@ -152,11 +162,15 @@ df::ObjectList df::WorldManager::isCollision(Object *p_o, Vector where) const {
 	ObjectListIterator li(&m_updates);
 	while (!li.isDone()) {
 		Object *p_temp_o = li.currentObject();
+
+		
 		
 		// Make sure it does not consider itself
 		if (p_temp_o != p_o) {
 
 			// Same location and both solid?
+			
+			//LM.writeLog("Object Position: (%f, %f)", p_temp_o->getPosition().getX(), p_temp_o->getPosition().getY());
 			if (posititonsIntersect(p_temp_o->getPosition(), where) && (p_temp_o->isSolid())) {
 				collisionList.insert(p_temp_o);
 			}
@@ -172,6 +186,8 @@ df::ObjectList df::WorldManager::isCollision(Object *p_o, Vector where) const {
 
 int df::WorldManager::moveObject(Object *p_o, Vector where) {
 	if (p_o->isSolid()) {
+
+
 		//Get Collisions
 		ObjectList list = isCollision(p_o, where);
 

@@ -8,18 +8,24 @@
 #include "Object.h"
 #include "Vector.h"
 #include "WorldManager.h"
+#include "LogManager.h"
 
 // Construct object. Set default params and
 // add to game world (WorldManager)
 df::Object::Object()
 {
+
 	// Add self to game world
 	df::WorldManager::getInstance().insertObject(this);
 
 	static int id_counter;
 	id = id_counter++;
-	type = "Object";
+
+	m_solidness = HARD;
+
+	m_type = "Object";
 	position = *(new Vector);
+	m_altitude = MAX_ALTITUDE / 2;
 }
 
 // Destroy object
@@ -27,7 +33,8 @@ df::Object::Object()
 df::Object::~Object()
 {
 	// Add self to game world
-	df::WorldManager::getInstance().removeObject(this);
+	WM.removeObject(this);
+	//delete this;
 }
 
 // set Object id
@@ -42,12 +49,12 @@ int df::Object::getId() const {
 
 // set type identifier of object
 void df::Object::setType(std::string new_type) {
-	type = new_type;
+	m_type = new_type;
 }
 
 // Get type identifier of object
 std::string df::Object::getType() const {
-	return type;
+	return m_type;
 }
 
 // set position of object
@@ -69,8 +76,12 @@ void df::Object::draw() {
 }
 
 int df::Object::setAltitude(int new_altitude) {
-	m_altitude = new_altitude;
-	return 0;
+	if ((new_altitude > 0) && (new_altitude <= MAX_ALTITUDE)) {
+		m_altitude = new_altitude;
+		return 0;
+	}
+
+	return 1;
 }
 
 int df::Object::getAltitude() const {

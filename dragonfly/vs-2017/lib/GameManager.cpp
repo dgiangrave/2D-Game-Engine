@@ -118,6 +118,7 @@ void df::GameManager::shutDown()
 // The game loop
 void df::GameManager::run()
 {
+	LM.writeLog("Game loop start");
 	Clock clock;
 	ObjectList world_objects;
 	while (!game_over)
@@ -131,27 +132,24 @@ void df::GameManager::run()
 		onEvent(&s);
 
 		// ----- Update Game world state -----
-		
 		// Have objects update themselves
 		WM.update();
 
 		// Move all objects
-
 		// Draw all objects
 		WM.draw();
-		
 		
 		// ----- Draw current scene to back buffer -----
 		// ----- Swap back buffer to current buffer -----
 		DM.swapBuffers();
-
 		// ----- Sleep if needed -----
-		int sleep_time = (getFrameTime() - clock.split());
-		Sleep(sleep_time);
+		int sleep_time = (getFrameTime() - clock.split()/1000);
+		if (sleep_time > 0) {
+			Sleep(sleep_time);
+		}
 
 
 		// Record messege of game loop to the log
-		//df::LogManager& log_manager = df::LogManager::getInstance();
-		//log_manager.writeLog("Full game loop processed");
+		//LM.writeLog("Full game loop processed");
 	}
 }

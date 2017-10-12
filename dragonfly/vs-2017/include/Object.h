@@ -25,7 +25,7 @@ namespace df {
 
 	private:
 		int id;             // Unique object identifier
-		std::string type;   // user-defined identifier
+		std::string m_type;   // user-defined identifier
 		Vector position;    // position in game world
 		int m_altitude;
 
