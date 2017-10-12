@@ -155,20 +155,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Clock.h" />
     <ClInclude Include="include\Color.h" />
     <ClInclude Include="include\DisplayManager.h" />
     <ClInclude Include="include\Event.h" />
     <ClInclude Include="include\EventCollision.h" />
     <ClInclude Include="include\EventKeyboard.h" />
-    <ClInclude Include="include\EventNuke.h" />
     <ClInclude Include="include\EventOut.h" />
     <ClInclude Include="include\EventStep.h" />
-    <ClInclude Include="include\Explosion.h" />
     <ClInclude Include="include\GameManager.h" />
-    <ClInclude Include="include\GameOver.h" />
-    <ClInclude Include="include\Hero.h" />
     <ClInclude Include="include\InputManager.h" />
     <ClInclude Include="include\LogManager.h" />
     <ClInclude Include="include\Manager.h" />
@@ -176,40 +171,27 @@
     <ClInclude Include="include\Object.h" />
     <ClInclude Include="include\ObjectList.h" />
     <ClInclude Include="include\ObjectListIterator.h" />
-    <ClInclude Include="include\Reticle.h" />
-    <ClInclude Include="include\Saucer.h" />
-    <ClInclude Include="include\Star.h" />
-    <ClInclude Include="include\TestClass.h" />
     <ClInclude Include="include\utility.h" />
     <ClInclude Include="include\Vector.h" />
     <ClInclude Include="include\WorldManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\game.cpp" />
-    <ClCompile Include="lib\Bullet.cpp" />
     <ClCompile Include="lib\Clock.cpp" />
     <ClCompile Include="lib\DisplayManager.cpp" />
     <ClCompile Include="lib\Event.cpp" />
     <ClCompile Include="lib\EventCollision.cpp" />
     <ClCompile Include="lib\EventKeyboard.cpp" />
     <ClCompile Include="lib\EventMouse.cpp" />
-    <ClCompile Include="lib\EventNuke.cpp" />
     <ClCompile Include="lib\EventOut.cpp" />
     <ClCompile Include="lib\EventStep.cpp" />
-    <ClCompile Include="lib\Explosion.cpp" />
     <ClCompile Include="lib\GameManager.cpp" />
-    <ClCompile Include="lib\GameOver.cpp" />
-    <ClCompile Include="lib\Hero.cpp" />
     <ClCompile Include="lib\InputManager.cpp" />
     <ClCompile Include="lib\LogManager.cpp" />
     <ClCompile Include="lib\Manager.cpp" />
     <ClCompile Include="lib\Object.cpp" />
     <ClCompile Include="lib\ObjectList.cpp" />
     <ClCompile Include="lib\ObjectListIterator.cpp" />
-    <ClCompile Include="lib\Reticle.cpp" />
-    <ClCompile Include="lib\Saucer.cpp" />
-    <ClCompile Include="lib\Star.cpp" />
-    <ClCompile Include="lib\TestClass.cpp" />
     <ClCompile Include="lib\utility.cpp" />
     <ClCompile Include="lib\Vector.cpp" />
     <ClCompile Include="lib\WorldManager.cpp" />
