@@ -10,6 +10,8 @@
 
 #include "Vector.h"
 #include "Event.h"
+#include "Sprite.h"
+#include "Box.h"
 
 namespace df {
 
@@ -33,6 +35,15 @@ namespace df {
 		float speed;	// Object speed in direction
 
 		Solidness m_solidness; // Solidness of object
+
+		//attributes for sprites
+		Sprite *p_sprite;
+		bool sprite_centered; //When true, sprite is cented on object position
+		int sprite_index;
+		int sprite_slowdown; //Slowdown rate(1= no slowdown, - = stop)
+		int sprite_slowdown_counter; //Slowdown counter
+
+		Box box; // Box for sprite boundary and collisions
 
 	public:
 		// Construct object. Set default params and
@@ -104,6 +115,38 @@ namespace df {
 
 		// Return object solidness
 		Solidness getSolidness() const;
+
+		//methods associated with object's having sprite
+		//Set object sprite to new one
+		//If set_box is true, set bounding box to size of sprite
+		//Set sprite index to 0 (first frame)
+		void setSprite(Sprite *p_new_sprite, bool set_box = true);
+
+		//return pointer to sprite associated with object
+		Sprite *getSprite() const;
+
+		//Set sprite to be centered at Object Position
+		void setCentered(bool centered);
+		//Check is sprite is centered
+		bool isCentered() const;
+
+		//Set index of current sprite sprite frame to be displayed
+		void setSpriteIndex(int new_sprite_index);
+
+		//Return index of current sprite frame to be displayed
+		int getSpriteIndex() const;
+
+		//Slow down sprite animations
+		//Sprite slowdown is in multiples of GameManger frame time.
+		void setSpriteSlowdown(int new_sprite_slowdown);
+		int getSpriteSlowdown() const;
+		void setSpriteSlowdownCounter(int new_sprite_slowdown_count);
+		int getSpriteSlowdownCounter() const;
+
+		// Set object's bounding box
+		void setBox(Box new_box);
+		// Get Object's bounding box
+		Box getBox() const;
 	};
 
 } // end namespace df

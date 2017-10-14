@@ -6,6 +6,7 @@
 #include "DisplayManager.h"
 #include "LogManager.h"
 #include "Color.h"
+#include "utility.h"
 
 // Set default fields
 df::DisplayManager::DisplayManager()
@@ -62,6 +63,8 @@ void df::DisplayManager::shutDown() {
 }
 
 int df::DisplayManager::drawCh(Vector world_pos, char ch, Color color) const {
+	Vector view_pos = worldToView(world_pos);
+
 	//make sure the window is allocated
 	if (m_p_window == NULL) {
 		return -1;
@@ -227,6 +230,39 @@ int df::DisplayManager::drawString(Vector pos, std::string str, Justification ju
 	}
 
 	return 0;
+}
+
+
+int df::DisplayManager::drawFrame(Vector world_pos, Frame frame, bool centered, Color color) const {
+	int x_off;
+	int y_off;
+	
+
+	if (frame.getString().empty()) {
+		LM.writeLog("Frame is empty");
+		return -1;
+	}
+
+	// Center if true otherwise 0 out
+	if (centered == true) {
+		x_off = frame.getWidth() / 2;
+		y_off = frame.getHeight() / 2;
+	}
+	else {
+		x_off = 0;
+		y_off = 0;
+	}
+
+	
+	std::string str = frame.getString();
+
+	// Draw frame, one character at a time
+	for (int y = 0; y <= frame.getHeight() - 1; y++) {
+		for (int x = 0; x <= frame.getWidth() - 1; x++) {
+			Vector temp_pos(world_pos.getX() - x_off + x, world_pos.getY() - y_off + y);
+			drawCh(temp_pos, str[y * frame.getWidth() + x], color);
+		}
+	}
 }
 
 

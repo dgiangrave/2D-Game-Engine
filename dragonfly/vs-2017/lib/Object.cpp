@@ -9,6 +9,7 @@
 #include "Vector.h"
 #include "WorldManager.h"
 #include "LogManager.h"
+#include "DisplayManager.h"
 
 // Construct object. Set default params and
 // add to game world (WorldManager)
@@ -72,7 +73,37 @@ int df::Object::eventHandler(const Event *p_e) {
 }
 
 void df::Object::draw() {
-	//return;
+
+	//If sprite not defined, don't continue further
+	if (p_sprite == NULL) {
+		LM.writeLog("Object::draw() ERROR! sprite is null");
+		return;
+	}
+
+	int index = getSpriteIndex();
+	//Ask graphics manager to draw current frame
+	DM.drawFrame(position, p_sprite->getFrame(index), sprite_centered, p_sprite->getColor());
+
+	// test if animation frozen
+	if (getSpriteSlowdown() == 0) {
+		return;
+	}
+
+	int count = getSpriteSlowdownCounter();
+	count++;
+
+	if (count >= getSpriteSlowdown()) {
+		count = 0; 
+		index++;
+
+		//if at last frame, loop to beginning
+		if (index >= p_sprite->getFrameCount()) {
+			index = 0;
+		}
+	}
+	
+	setSpriteSlowdownCounter(count);
+	setSpriteIndex(index);
 }
 
 int df::Object::setAltitude(int new_altitude) {
@@ -141,4 +172,55 @@ int df::Object::setSolidness(Solidness new_solid) {
 
 df::Solidness df::Object::getSolidness() const {
 	return m_solidness;
+}
+
+
+
+void df::Object::setSprite(Sprite *p_new_sprite, bool set_box) {
+	p_sprite = p_new_sprite;
+	box.setHorizontal(p_new_sprite->getWidth());
+	box.setVertical(p_new_sprite->getHeight());
+	box.setCorner(Vector((int)-(p_new_sprite->getWidth() / 2), (int)-(p_new_sprite->getHeight() / 2)));
+}
+
+df::Sprite *df::Object::getSprite() const {
+	return p_sprite;
+}
+
+void df::Object::setCentered(bool centered) {
+	sprite_centered = centered;
+}
+
+bool df::Object::isCentered() const {
+	return sprite_centered;
+}
+
+void df::Object::setSpriteIndex(int new_sprite_index) {
+	sprite_index = new_sprite_index;
+}
+
+int df::Object::getSpriteIndex() const {
+	return sprite_index;
+}
+
+void df::Object::setSpriteSlowdown(int new_sprite_slowdown) {
+	sprite_slowdown = new_sprite_slowdown;
+}
+int df::Object::getSpriteSlowdown() const {
+	return sprite_slowdown;
+}
+void df::Object::setSpriteSlowdownCounter(int new_sprite_slowdown_count) {
+	sprite_slowdown_counter = new_sprite_slowdown_count;
+}
+int df::Object::getSpriteSlowdownCounter() const {
+	return sprite_slowdown_counter;
+}
+
+//Set object's bounding box
+void df::Object::setBox(Box new_box) {
+	box = new_box;
+}
+//Get Object's bounding box
+df::Box df::Object::getBox() const {
+	return box;
 }

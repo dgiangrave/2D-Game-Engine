@@ -12,6 +12,7 @@
 #include "EventStep.h"
 #include "DisplayManager.h"
 #include "InputManager.h"
+#include "ResourceManager.h"
 
 #include <Windows.h>
 
@@ -92,6 +93,18 @@ int df::GameManager::startUp()
 	else {
 		LM.writeLog("### Input Manager Started Up ###");
 	}
+
+	// Start Resource Manager
+	if (RM.startUp() != 0) {
+		LM.writeLog("### FAILED TO START RESOURCE MANAGER ###");
+		return 1;
+	}
+	else {
+		LM.writeLog("### Resource Manager Started Up ###");
+	}
+
+	WM.setBoundary(Box(Vector(0, 0), DM.getHorizontal(), DM.getVertical()));
+	WM.setView(Box(Vector(0, 0), DM.getHorizontal(), DM.getVertical()));
 
 
 

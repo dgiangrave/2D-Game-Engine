@@ -13,6 +13,7 @@
 #include "ObjectListIterator.h"
 #include "Object.h"
 #include "DisplayManager.h"
+#include "ResourceManager.h"
 
 
 
@@ -21,6 +22,10 @@ int main(int argc, char *argv[]) {
 	GM.startUp();
 	
 	LM.setFlush(true);
+	
+
+	RM.loadSprite("test.txt", "test-sprite");
+
 	
 
 	GM.run();

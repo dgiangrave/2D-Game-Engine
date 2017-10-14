@@ -9,6 +9,7 @@
 #include "EventOut.h"
 #include "DisplayManager.h"
 #include "LogManager.h"
+#include "ViewObject.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -147,7 +148,12 @@ void df::WorldManager::draw() {
 		while (!li.isDone()) {
 			Object *p_temp_o = li.currentObject();
 			if (p_temp_o->getAltitude() == alt) {
-				p_temp_o->draw();
+				// Bounding box coordinates are relative to Object,
+				// so convert to world coordinates
+				Box temp_box = getWorldBox(p_temp_o);
+				if (boxIntersectsBox(temp_box, view) || dynamic_cast <ViewObject *> (p_temp_o)) {
+					p_temp_o->draw();
+				}
 			}
 			li.next();
 		}
@@ -171,7 +177,15 @@ df::ObjectList df::WorldManager::isCollision(Object *p_o, Vector where) const {
 			// Same location and both solid?
 			
 			//LM.writeLog("Object Position: (%f, %f)", p_temp_o->getPosition().getX(), p_temp_o->getPosition().getY());
-			if (posititonsIntersect(p_temp_o->getPosition(), where) && (p_temp_o->isSolid())) {
+			//if (posititonsIntersect(p_temp_o->getPosition(), where) && (p_temp_o->isSolid())) {
+			
+			//World position bounding box for object at where
+			Box b = getWorldBox(p_o, where);
+
+			//World position bounding box for other object
+			Box b_temp = getWorldBox(p_temp_o);
+
+			if (boxIntersectsBox(b, b_temp) && p_temp_o->isSolid()) {
 				collisionList.insert(p_temp_o);
 			}
 
@@ -219,17 +233,20 @@ int df::WorldManager::moveObject(Object *p_o, Vector where) {
 				return -1;
 			}
 		}
+
+		if (p_view_following == p_o) {
+			setViewPosition(p_o->getPosition());
+		}
+
+		return 0;
 	}
 
 	// Move
+	Box orig_box = getWorldBox(p_o);
 	p_o->setPosition(where);
+	Box new_box = getWorldBox(p_o);
 
-	// Check if object has moved out of bounds
-	if (p_o->getPosition().getX() < 0 ||
-		p_o->getPosition().getX() > DM.getHorizontal() ||
-		p_o->getPosition().getY() < 0 ||
-		p_o->getPosition().getY() > DM.getVertical()) {
-
+	if (boxIntersectsBox(orig_box, boundary) && (boxIntersectsBox(new_box, boundary))) {
 		// Generate out of Bounds event and send to Object
 		EventOut ov;
 		p_o->eventHandler(&ov);
@@ -243,4 +260,73 @@ int df::WorldManager::moveObject(Object *p_o, Vector where) {
 
 int df::WorldManager::onEvent(const Event *p_event) const {
 	return Manager::onEvent(p_event);
+}
+
+void df::WorldManager::setBoundary(Box new_boundary) {
+	boundary = new_boundary;
+}
+
+df::Box df::WorldManager::getBoundary() const {
+	return boundary;
+}
+
+void df::WorldManager::setView(Box new_view) {
+	view = new_view;
+}
+
+df::Box df::WorldManager::getView() const {
+	return view;
+}
+
+void df::WorldManager::setViewPosition(Vector view_pos) {
+	// Make sure horizontal not out of boundary
+	int x = view_pos.getX() - view.getHorizontal() / 2;
+
+	if (x + view.getHorizontal() > boundary.getHorizontal()) {
+		x = boundary.getHorizontal() - view.getHorizontal();
+	}
+
+	if (x < 0)
+		x = 0;
+
+	// Make sure horizontal not out of boundary
+	int y = view_pos.getY() - view.getVertical() / 2;
+
+	if (y + view.getVertical() > boundary.getVertical()) {
+		y = boundary.getVertical() - view.getVertical();
+	}
+
+	if (y < 0)
+		y = 0;
+
+	//set view
+	Vector new_corner(x, y);
+	view.setCorner(new_corner);
+}
+
+int df::WorldManager::setViewFollowing(Object *p_new_view_following) {
+	bool found = false;
+	//set to null to turn 'off' following
+
+	if (p_new_view_following == NULL) {
+		p_view_following = NULL;
+		return 0;
+	}
+
+	ObjectListIterator li = ObjectListIterator(&m_updates);
+
+	//Delete all marked objects
+	li.first();
+	while (!li.isDone()) {
+		if (li.currentObject() == p_new_view_following)
+			found = true;
+		li.next();
+	}
+	if (!found) {
+		return -1;
+	}
+
+	p_view_following = p_new_view_following;
+	setViewPosition(p_view_following->getPosition());
+	return 0;
 }

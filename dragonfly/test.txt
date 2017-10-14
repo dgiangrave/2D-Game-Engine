@@ -1,0 +1,20 @@
+frames 5
+width 6
+height 2
+color green
+ ---- 
+/____\
+end
+ ---- 
+/___o\
+end
+ ---- 
+/__o_\
+end
+ ---- 
+/_o__\
+end
+ ---- 
+/o___\
+end
+eof

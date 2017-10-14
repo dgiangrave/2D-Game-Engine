@@ -1,5 +1,9 @@
-Time: 21:36:34  Message: ### Log Manager Started Up ###
-Time: 21:36:34  Message: ### World Manager Started Up ###
-Time: 21:36:43  Message: ### Display Manager Started Up ###
-Time: 21:36:43  Message: ### Input Manager Started Up ###
-Time: 21:36:43  Message: Game loop start
+Time: 15:48:27  Message: ### Log Manager Started Up ###
+Time: 15:48:27  Message: ### World Manager Started Up ###
+Time: 15:48:29  Message: ### Display Manager Started Up ###
+Time: 15:48:29  Message: ### Input Manager Started Up ###
+Time: 15:48:29  Message: frames 5
+Time: 15:48:29  Message: width 6
+Time: 15:48:29  Message: height 2
+Time: 15:48:29  Message: Failed to find eof on line: 4! Messege: tag not properly read from file!
+Time: 15:48:29  Message: Game loop start

@@ -29,6 +29,11 @@ namespace df {
 		ObjectList m_updates;  // All objects in the world to update
 		ObjectList m_deletions; // All objects to be deleted
 
+		Box boundary;   //World Boundary
+		Box view;       //Player view of game world
+
+		Object *p_view_following; //Object view is following
+
 	public:
 		// Get a signle instance
 		static WorldManager &getInstance();
@@ -77,6 +82,25 @@ namespace df {
 		// Return count of number  of events sent
 		int onEvent(const Event *p_event) const;
 
+		//Set game world boundary
+		void setBoundary(Box new_boundary);
+
+		//Get game world boundary
+		Box getBoundary() const;
+
+		//Set player view of game world.
+		void setView(Box new_view);
+
+		//Get player view
+		Box getView() const;
+
+		//Set view to center window on Position view_pos
+		//View edge will not go beyond world boundary
+		void setViewPosition(Vector view_pos);
+
+		//Set view to center window on Object
+		//Set to NULL to stop following
+		int setViewFollowing(Object *p_new_view_following);
 	};
 
 } // End df namespace

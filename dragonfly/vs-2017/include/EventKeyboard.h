@@ -1,6 +1,6 @@
-///
-/// A "keyboard" event
-/// 
+//
+// A "keyboard" event
+// 
 
 #ifndef __EVENT_KEYBOARD_H__
 #define __EVENT_KEYBOARD_H__

@@ -11,6 +11,7 @@
 #include "Color.h"
 #include "Manager.h"
 #include "Vector.h"
+#include "Frame.h"
 
 // Two-letter acronym for easier access to manager
 #define DM df::DisplayManager::getInstance()
@@ -111,6 +112,9 @@ namespace df {
 
 		// Return pointer to SFML drawing window
 		sf::RenderWindow *getWindow() const;
+
+		// Draw a single sprite frame at window locatio x,y
+		int DisplayManager::drawFrame(Vector world_pos, Frame frame, bool centered, Color color) const;
 	};
 
 } // end of namespace df
