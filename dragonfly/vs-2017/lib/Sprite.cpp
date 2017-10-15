@@ -4,6 +4,7 @@
 // File:    Sprite.cpp
 
 #include "Sprite.h"
+#include "LogManager.h"
 
 df::Sprite::Sprite(int max_frames) {
 	m_frame_count = 0;
@@ -13,6 +14,7 @@ df::Sprite::Sprite(int max_frames) {
 	m_frame = new Frame[max_frames];
 	m_max_frame_count = max_frames;
 	m_color = COLOR_DEFAULT;
+	m_label = "";
 }
 
 df::Sprite::~Sprite() {
@@ -22,7 +24,8 @@ df::Sprite::~Sprite() {
 }
 
 int df::Sprite::addFrame(Frame new_frame) {
-	if (m_frame_count >= m_max_frame_count) {
+	if (m_frame_count == m_max_frame_count) {
+		LM.writeLog("Could not add frame, at max frame count");
 		return -1;
 	}
 	else {
@@ -35,6 +38,7 @@ int df::Sprite::addFrame(Frame new_frame) {
 
 df::Frame df::Sprite::getFrame(int frame_number) const {
 	if ((frame_number < 0) || (frame_number >= m_frame_count)) {
+		LM.writeLog("Bad frame number requested, empty frame provided!");
 		Frame empty;
 		return empty;
 	}

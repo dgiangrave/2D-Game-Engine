@@ -12,16 +12,14 @@
 df::DisplayManager::DisplayManager()
 {
 	setType("DisplayManager");
-	
-	
+
 
 	// Set Window sizes to default
 	m_window_horizontal_pixels = WINDOW_HORIZONTAL_PIXELS_DEFAULT;
 	m_window_vertical_pixels = WINDOW_VERTICAL_PIXELS_DEFAULT;
 	m_window_horizontal_chars = WINDOW_HORIZONTAL_CHARS_DEFAULT;
 	m_window_vertical_chars = WINDOW_VERTICAL_CHARS_DEFAULT;
-
-	
+	m_window_background_color = WINDOW_BACKGROUND_COLOR_DEFAULT;
 
 }
 
@@ -237,6 +235,7 @@ int df::DisplayManager::drawFrame(Vector world_pos, Frame frame, bool centered, 
 	int x_off;
 	int y_off;
 	
+	//LM.writeLog("Frame: %s", frame.getString().c_str());
 
 	if (frame.getString().empty()) {
 		LM.writeLog("Frame is empty");

@@ -14,12 +14,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 // Default constructor
 df::WorldManager::WorldManager()
 {
 	setType("WorldManager");
-	m_updates = *(new ObjectList());
-	m_deletions = *(new ObjectList());
+	//m_updates = *(new ObjectList());
+	//m_deletions = *(new ObjectList());
 }
 
 df::WorldManager& df::WorldManager::getInstance()
@@ -31,6 +32,14 @@ df::WorldManager& df::WorldManager::getInstance()
 
 int df::WorldManager::startUp()
 {
+	m_updates.clear();
+	m_deletions.clear();
+	Manager::startUp();
+
+	setViewFollowing(nullptr);
+	setBoundary(Box(Vector(0, 0), DM.getHorizontal(), DM.getVertical()));
+	setView(Box(Vector(0, 0), DM.getHorizontal(), DM.getVertical()));
+
 	return Manager::startUp();
 }
 
@@ -236,6 +245,15 @@ int df::WorldManager::moveObject(Object *p_o, Vector where) {
 
 		if (p_view_following == p_o) {
 			setViewPosition(p_o->getPosition());
+		}
+
+		p_o->setPosition(where);
+
+		// Do this after the move call to prevent any loops of setting the position
+		if (where.getX() < 0 || where.getX() > view.getHorizontal() - 1 ||
+		where.getY() < 0 || where.getY() > view.getVertical() - 1) {
+			EventOut o;
+			p_o->eventHandler(&o);
 		}
 
 		return 0;

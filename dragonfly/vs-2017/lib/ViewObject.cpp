@@ -23,12 +23,16 @@ df::ViewObject::ViewObject() {
 	setLocation(TOP_CENTER);
 	setColor(COLOR_DEFAULT);
 
+	setDrawValue();
+	setBorder(true);
+
 	//Register interests
 	//registerInterest(VIEW_EVENT); // if section 4.15 implemented
 }
 
 
 void df::ViewObject::setLocation(ViewObjectLocation new_location) {
+
 	Vector p;
 	int y_delta = 0;
 
@@ -77,7 +81,7 @@ void df::ViewObject::setLocation(ViewObjectLocation new_location) {
 
 	// Set new location
 	m_location = new_location;
-
+	
 }
 
 void df::ViewObject::setBorder(bool new_border) {
@@ -112,6 +116,7 @@ void df::ViewObject::draw() {
 		DM.drawString(Vector(pos.getX(), pos.getY() - 1), border_box, CENTER_JUSTIFIED, m_color);
 		DM.drawString(Vector(pos.getX(), pos.getY() + 1), border_box, CENTER_JUSTIFIED, m_color);
 	}
+	
 }
 
 

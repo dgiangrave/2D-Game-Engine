@@ -12,6 +12,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\saucershoot">
+      <UniqueIdentifier>{4843a3cb-4a19-4c66-a336-5311808e858c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\saucershoot">
+      <UniqueIdentifier>{7e6c42ba-de24-46d2-8360-1099c63f7488}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\game.cpp">
@@ -71,9 +77,6 @@
     <ClCompile Include="lib\EventOut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Frame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lib\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,6 +96,39 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lib\EventView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\Bullet.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\EventNuke.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\Explosion.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\GameOver.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\GameStart.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\Hero.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\Points.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\Reticle.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\Saucer.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\saucershoot\Star.cpp">
+      <Filter>Source Files\saucershoot</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -177,6 +213,36 @@
     </ClInclude>
     <ClInclude Include="include\EventView.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\Bullet.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\EventNuke.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\Explosion.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\GameOver.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\GameStart.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\Hero.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\Points.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\Reticle.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\Saucer.h">
+      <Filter>Header Files\saucershoot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\saucershoot\Star.h">
+      <Filter>Header Files\saucershoot</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

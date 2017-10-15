@@ -9,7 +9,7 @@
 #include "Manager.h"
 #include "ObjectList.h"
 
-// Two-letter acronym for easier access to manager
+// Two-letter acronym for easier access to manager.
 #define WM df::WorldManager::getInstance()
 
 

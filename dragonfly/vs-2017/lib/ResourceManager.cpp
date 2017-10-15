@@ -43,6 +43,9 @@ int df::ResourceManager::startUp()
 	m_sound_count = 0;
 	m_music_count = 0;
 
+	for (int i = 0; i < MAX_SPRITES; i++) {
+		p_sprite[i] = nullptr;
+	}
 
 	return Manager::startUp();
 }
@@ -69,7 +72,7 @@ int df::ResourceManager::loadSprite(std::string filename, std::string label) {
 	// Read in frame count
 	try {
 		frames = readLineInt(file, &lineNumber, FRAMES_TOKEN.c_str());
-		lineNumber++;
+		//lineNumber++;
 	}
 	catch (std::exception e) {
 		LM.writeLog("Failed to read frame count on line : %d. Error message: %s", lineNumber, e.what());
@@ -106,46 +109,54 @@ int df::ResourceManager::loadSprite(std::string filename, std::string label) {
 
 
 	// ----- Make New sprite based on header ---------
-	Sprite *p_new_sprite = new Sprite(frames);
-	p_new_sprite->setHeight(height);
-	p_new_sprite->setWidth(width);
+	p_sprite[m_sprite_count] = new Sprite(frames);
+	p_sprite[m_sprite_count]->setWidth(width);
+	p_sprite[m_sprite_count]->setHeight(height);
+	//Sprite *p_new_sprite = new Sprite(frames);
+	//p_new_sprite->setHeight(height);
+	//p_new_sprite->setWidth(width);
 
 	if (color == "black") {
-		p_new_sprite->setColor(Color::BLACK);
+		p_sprite[m_sprite_count]->setColor(Color::BLACK);
 	}
 	else if (color == "red") {
-		p_new_sprite->setColor(Color::RED);
+		p_sprite[m_sprite_count]->setColor(Color::RED);
 	}
 	else if (color == "green") {
-		p_new_sprite->setColor(Color::GREEN);
+		p_sprite[m_sprite_count]->setColor(Color::GREEN);
 	}
 	else if (color == "yellow") {
-		p_new_sprite->setColor(Color::YELLOW);
+		p_sprite[m_sprite_count]->setColor(Color::YELLOW);
 	}
 	else if (color == "blue") {
-		p_new_sprite->setColor(Color::BLUE);
+		p_sprite[m_sprite_count]->setColor(Color::BLUE);
 	}
 	else if (color == "magenta") {
-		p_new_sprite->setColor(Color::MAGENTA);
+		p_sprite[m_sprite_count]->setColor(Color::MAGENTA);
 	}
 	else if (color == "cyan") {
-		p_new_sprite->setColor(Color::CYAN);
+		p_sprite[m_sprite_count]->setColor(Color::CYAN);
 	}
 	else if (color == "white") {
-		p_new_sprite->setColor(Color::WHITE);
+		p_sprite[m_sprite_count]->setColor(Color::WHITE);
 	}
 	else {
 		LM.writeLog("Color string not found setting to default");
-		p_new_sprite->setColor(COLOR_DEFAULT);
+		p_sprite[m_sprite_count]->setColor(COLOR_DEFAULT);
 	}
 
 	//sprite.setColor(color conversion)
-	p_new_sprite->setColor(df::Color::WHITE);
+	//p_sprite[m_sprite_count]->setColor(df::Color::WHITE);
 
 	for (int i = 1; i <= frames; i++) {
 		Frame next_frame = readFrame(file, &lineNumber, width, height);
-		p_new_sprite->addFrame(next_frame);
+		//LM.writeLog("Again: /n%s", next_frame.getString().c_str());
+		p_sprite[m_sprite_count]->addFrame(next_frame);
 	}
+	p_sprite[m_sprite_count]->setLabel(label);
+	//LM.writeLog("Frame 0: \n%s", p_sprite[m_sprite_count]->getFrame(0).getString().c_str());
+	m_sprite_count++;
+	//LM.writeLog("Frame 0 by label: \n%s", this->getSprite(label)->getFrame(0).getString().c_str());
 
 	// Check that the file is still good
 	if (!(*file).good()) {
@@ -153,30 +164,34 @@ int df::ResourceManager::loadSprite(std::string filename, std::string label) {
 	}
 
 	// Read the eof token
+	/*
 	try {
 		readLineStr(file, &lineNumber, END_FRAME_TOKEN.c_str());
 		lineNumber++;
 	}
 	catch (std::exception e) {
 		LM.writeLog("Failed to find eof on line: %d! Messege: %s", lineNumber, e.what());
-		delete p_new_sprite;
+		delete p_sprite[m_sprite_count];
 		return -1;
 	}
+	*/
 	
 	// Close the file
 	file->close();
 
 	// Set the sprites label
-	p_new_sprite->setLabel(label);
+	
 
 	// Add the sprite to the list
-	if (m_sprite_count < MAX_SPRITES) {
-		p_sprite[m_sprite_count] = p_new_sprite;
-		m_sprite_count++;
-	}
-	else {
-		LM.writeLog("Could not add sprite, already at max sprite count!");
-	}
+	//if (m_sprite_count < MAX_SPRITES) {
+	//	p_sprite[m_sprite_count] = p_new_sprite;
+	//	m_sprite_count++;
+	//}
+	//else {
+	//	LM.writeLog("Could not add sprite, already at max sprite count!");
+	//}
+
+	
 
 	return 0;
 }
@@ -205,12 +220,13 @@ int df::ResourceManager::unloadSprite(std::string label) {
 
 
 df::Sprite *df::ResourceManager::getSprite(std::string label) const {
-	for (int i = 0; i < m_sprite_count; i++) {
-		if (label.compare(p_sprite[i]->getLabel()) == 0) {
+	for (int i = 0; i <= m_sprite_count - 1; i++) {
+		if (label == p_sprite[i]->getLabel()) {
 			return p_sprite[i];
 		}
 	}
 
+	
 	LM.writeLog("FAILED to get sprite with label '%s'! Could not be found in sprite array!", label.c_str());
 	return NULL; 
 }
@@ -225,7 +241,7 @@ int readLineInt(std::ifstream *p_file, int *p_line_number, const char *tag) {
 
 	try {
 		std::getline(*p_file, line);
-		LM.writeLog("%s", line.c_str());
+		//LM.writeLog("%s", line.c_str());
 	}
 	catch (std::exception e) {
 		throw std::runtime_error("Failed getline from p_file!");
@@ -299,6 +315,7 @@ df::Frame readFrame(std::ifstream *p_file, int *p_line_number, int width, int he
 			LM.writeLog("Defaulting to empty frame!");
 			return df::Frame();
 		}
+		(*p_line_number)++;
 
 		if (line.length() != width) {
 			LM.writeLog("Error line %d. Line width %d, expected %d.", *p_line_number, line.length(), width);
@@ -307,7 +324,7 @@ df::Frame readFrame(std::ifstream *p_file, int *p_line_number, int width, int he
 		}
 
 		frame_str += line;
-		(*p_line_number)++;
+		
 	}
 
 	if (!p_file->good()) {
@@ -325,14 +342,15 @@ df::Frame readFrame(std::ifstream *p_file, int *p_line_number, int width, int he
 		return df::Frame();
 	}
 
-	if (line.compare(0, df::END_FRAME_TOKEN.length(), df::END_FRAME_TOKEN)) {
+	//if (line.compare(0, df::END_FRAME_TOKEN.length(), df::END_FRAME_TOKEN)) {
+	if (line != df::END_FRAME_TOKEN) {
 		LM.writeLog("Error line %d. Failed to find end of frame token!");
 		LM.writeLog("Defaulting to empty frame!");
 		return df::Frame();
 	}
 
 	df::Frame frame = df::Frame(width, height, frame_str);
-
+	//LM.writeLog("Added Frame: \n%s", frame.getString().c_str());
 	return frame;
 }
 

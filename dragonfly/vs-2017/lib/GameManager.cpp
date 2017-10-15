@@ -141,7 +141,7 @@ void df::GameManager::run()
 		IM.getInput();
 
 		// ------ Step Event -----
-		EventStep s;
+		EventStep s(m_step_count);
 		onEvent(&s);
 
 		// ----- Update Game world state -----
@@ -161,7 +161,7 @@ void df::GameManager::run()
 			Sleep(sleep_time);
 		}
 
-
+		m_step_count++;
 		// Record messege of game loop to the log
 		//LM.writeLog("Full game loop processed");
 	}

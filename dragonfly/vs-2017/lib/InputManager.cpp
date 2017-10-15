@@ -79,7 +79,7 @@ void df::InputManager::getInput() {
 		if (event.type == sf::Event::MouseMoved) {
 			EventMouse m;
 			m.setMouseAction(MOVED);
-			Vector mousePos = Vector(event.mouseButton.x, event.mouseButton.y);
+			Vector mousePos = Vector(event.mouseMove.x, event.mouseMove.y);
 			m.setMousePosition(df::pixelsToSpaces(mousePos));
 			onEvent(&m);
 		}

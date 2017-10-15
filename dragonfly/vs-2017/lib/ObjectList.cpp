@@ -10,6 +10,11 @@
 df::ObjectList::ObjectList()
 {
 	count = 0;
+
+	for (int i = 0; i < MAX_OBJECTS; i++) {
+		p_obj[i] = nullptr;
+	}
+
 }
 
 // Insert object pointer in list
@@ -17,7 +22,7 @@ df::ObjectList::ObjectList()
 int df::ObjectList::insert(Object *p_o)
 {
 	// Check for room
-	if (count == MAX_OBJECTS)
+	if (count >= MAX_OBJECTS)
 		return -1;
 
 	p_obj[count] = p_o;
@@ -46,6 +51,10 @@ int df::ObjectList::remove(Object *p_o)
 
 // clear list (setting count to 0)
 void df::ObjectList::clear() {
+	for (int i = 0; i < MAX_OBJECTS; i++) {
+		p_obj[i] = nullptr;
+	}
+
 	count = 0;
 }
 
@@ -56,16 +65,20 @@ int df::ObjectList::getCount() const {
 
 // return true if list is empty, else false
 bool df::ObjectList::isEmpty() const {
-	if (count == 0)
+	if (count == 0) {
 		return true;
-
-	return false;
+	}
+	else {
+		return false;
+	}
 }
 
 // return true if list is Full, else false
 bool df::ObjectList::isFull() const {
-	if (count == MAX_OBJECTS)
+	if (count == MAX_OBJECTS) {
 		return true;
-
-	return false;
+	}
+	else {
+		return false;
+	}
 }

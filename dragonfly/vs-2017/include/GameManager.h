@@ -24,6 +24,7 @@ namespace df {
 		void operator=(GameManager const&);   // Dont allow assignment
 		bool game_over;   // True, then game loop should stop
 		int frame_time;   // Target time per game loop, in milliseconds
+		int m_step_count;
 
 	public:
 		// Get the singleton instance of GameManager

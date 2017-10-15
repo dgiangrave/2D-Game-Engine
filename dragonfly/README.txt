@@ -1,8 +1,8 @@
-Dragonfly Niad
+Dragonfly
 David Giangrave
 dlgiangrave
 dlgiangrave@wpi.edu
-9-28-2017
+10-14-2017
 
 --------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ IMPORTANT!
 See http://dragonfly.wpi.edu/engine/index.html#setup for details.
 
 Note: This only works when the project folder is placed in the same
-directory as SFML
+directory as SFML-2.4
 
 1) Build, F7 on Windows from Visual Studio.
 
@@ -26,14 +26,33 @@ directory as SFML
 Directories:
 
 vs-2015/ - contains Visual Studio solution files (Microsoft Windows)
+vs-2015/include - contains dragonfly header files
+vs-2015/include/saucershoot - contains saucer shoot example headers
+vs-2015/lib - contains dragonfly cpp files
+vs-2015/lib/saucershoot - contains saucershoot example cpp files
+
+/*
+NOTE: you must have proper linkage to all above locations for
+      this to run, this does not use the default dragonfly setup
+      links but it should work with the relative paths
+*/
+
+sounds/ - contains sound files for saucershoot example
+sprites/ - contains sprites for saucershoot example
+../SFML-2.4 - Contains SFML outside of dragonflys directory
+../SFML-2.4/include - SFML header files
+../SFML-2.4/lib - SFML library files
 
 --------------------------------------------------------------------
 
 Testing Example:
 
-I used the dragonfly saucer shoot niad example that was provided to
-show the bulk of my testing. It properly shows use of all the 
-engines current functionality without any bugs.
+I used the dragonfly saucer shoot example from Professor Claypools
+github to show the bulk of my testing. It properly shows use of all
+the engines current functionality without any bugs. Do note however
+that some minor modifications were made to the example based on bugs
+in Professor Claypools code. This was things like only sending out
+event to stars that went off left side rather than right side.
 
 
 --------------------------------------------------------------------

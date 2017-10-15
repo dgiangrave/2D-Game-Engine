@@ -15,25 +15,35 @@
 // add to game world (WorldManager)
 df::Object::Object()
 {
+	position = Vector(0, 0);
+	m_type = "Object";
 
-	// Add self to game world
-	df::WorldManager::getInstance().insertObject(this);
-
-	static int id_counter;
+	static int id_counter = 1;
 	id = id_counter++;
 
 	m_solidness = HARD;
 
-	m_type = "Object";
-	position = *(new Vector);
+	Box box = Box(getPosition(), 1, 1);
+	sprite_slowdown = 0;
+	sprite_slowdown_counter = 0;
+	sprite_centered = false;
+	
 	m_altitude = MAX_ALTITUDE / 2;
+
+	setSpriteIndex(0);
+
+	speed = 0;
+	direction = Vector(0, 0);
+	setCentered(true);
+
+	// Add self to game world
+	WM.insertObject(this);
 }
 
 // Destroy object
 // remove from game world (WorldManager)
 df::Object::~Object()
 {
-	// Add self to game world
 	WM.removeObject(this);
 	//delete this;
 }
@@ -76,12 +86,16 @@ void df::Object::draw() {
 
 	//If sprite not defined, don't continue further
 	if (p_sprite == NULL) {
-		LM.writeLog("Object::draw() ERROR! sprite is null");
+		LM.writeLog("Sprite is null, could not draw!");
 		return;
 	}
 
 	int index = getSpriteIndex();
 	//Ask graphics manager to draw current frame
+
+	//LM.writeLog("Sprite draw label: %s", p_sprite->getLabel().c_str());
+	//LM.writeLog("Sprites pointer is: %p", p_sprite);
+
 	DM.drawFrame(position, p_sprite->getFrame(index), sprite_centered, p_sprite->getColor());
 
 	// test if animation frozen

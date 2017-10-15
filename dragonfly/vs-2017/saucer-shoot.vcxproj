@@ -77,8 +77,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\sfml-2.4\include;..\..\dragonfly\vs-2017\include;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\dragonfly\vs-2017\lib;..\..\sfml-2.4\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\dragonfly\vs-2017\include\saucershoot;..\..\sfml-2.4\include;..\..\dragonfly\vs-2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\dragonfly\vs-2017\lib\saucershoot;..\..\dragonfly\vs-2017\lib;..\..\sfml-2.4\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -115,7 +115,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-network-d.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -176,6 +176,16 @@
     <ClInclude Include="include\ObjectList.h" />
     <ClInclude Include="include\ObjectListIterator.h" />
     <ClInclude Include="include\ResourceManager.h" />
+    <ClInclude Include="include\saucershoot\Bullet.h" />
+    <ClInclude Include="include\saucershoot\EventNuke.h" />
+    <ClInclude Include="include\saucershoot\Explosion.h" />
+    <ClInclude Include="include\saucershoot\GameOver.h" />
+    <ClInclude Include="include\saucershoot\GameStart.h" />
+    <ClInclude Include="include\saucershoot\Hero.h" />
+    <ClInclude Include="include\saucershoot\Points.h" />
+    <ClInclude Include="include\saucershoot\Reticle.h" />
+    <ClInclude Include="include\saucershoot\Saucer.h" />
+    <ClInclude Include="include\saucershoot\Star.h" />
     <ClInclude Include="include\Sound.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\utility.h" />
@@ -185,7 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\game.cpp" />
-    <ClCompile Include="include\Frame.cpp" />
     <ClCompile Include="lib\Box.cpp" />
     <ClCompile Include="lib\Clock.cpp" />
     <ClCompile Include="lib\DisplayManager.cpp" />
@@ -196,6 +205,7 @@
     <ClCompile Include="lib\EventOut.cpp" />
     <ClCompile Include="lib\EventStep.cpp" />
     <ClCompile Include="lib\EventView.cpp" />
+    <ClCompile Include="lib\Frame.cpp" />
     <ClCompile Include="lib\GameManager.cpp" />
     <ClCompile Include="lib\InputManager.cpp" />
     <ClCompile Include="lib\LogManager.cpp" />
@@ -205,6 +215,16 @@
     <ClCompile Include="lib\ObjectList.cpp" />
     <ClCompile Include="lib\ObjectListIterator.cpp" />
     <ClCompile Include="lib\ResourceManager.cpp" />
+    <ClCompile Include="lib\saucershoot\Bullet.cpp" />
+    <ClCompile Include="lib\saucershoot\EventNuke.cpp" />
+    <ClCompile Include="lib\saucershoot\Explosion.cpp" />
+    <ClCompile Include="lib\saucershoot\GameOver.cpp" />
+    <ClCompile Include="lib\saucershoot\GameStart.cpp" />
+    <ClCompile Include="lib\saucershoot\Hero.cpp" />
+    <ClCompile Include="lib\saucershoot\Points.cpp" />
+    <ClCompile Include="lib\saucershoot\Reticle.cpp" />
+    <ClCompile Include="lib\saucershoot\Saucer.cpp" />
+    <ClCompile Include="lib\saucershoot\Star.cpp" />
     <ClCompile Include="lib\Sound.cpp" />
     <ClCompile Include="lib\Sprite.cpp" />
     <ClCompile Include="lib\utility.cpp" />
